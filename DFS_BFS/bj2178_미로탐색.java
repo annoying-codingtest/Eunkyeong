@@ -1,4 +1,4 @@
-package week1;
+package DFS_BFS;
 
 import java.util.Scanner;
 import java.util.LinkedList;
@@ -14,7 +14,7 @@ class Pair{
     }
 }
 
-public class baekjoon_2178 {
+public class bj2178_미로탐색 {
 
     static int N;
     static int M;
