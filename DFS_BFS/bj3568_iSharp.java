@@ -1,41 +1,74 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+package DFS_BFS;
+import java.util.*;
 
 public class bj3568_iSharp {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String origin = br.readLine().replace(",","").replace(";","");
-        String[] str = origin.split(" ");
+	public static void main(String[] args0) {
+		Scanner sc = new Scanner(System.in);
+		String line = sc.nextLine();
 
-        for (int i = 1; i < str.length; i++) {
-            String[] variable = reverseType(str[i]).split("#");
-            System.out.println(str[0]+variable[0]+" "+variable[1]+";");
-        }
-    }
+		String[] split = line.split(" ");
 
-    public static String reverseType(String str){
-        char[] origin = str.toCharArray();
-        String result = "";
+		// 기본 변수형
+		String base = split[0];
 
-        for (int i = str.length()-1; i >= 0; i--) {
-            if(origin[i]!=']'){
-                if(origin[i]=='*' || origin[i]=='&'){
-                    result += origin[i];
-                }else{ 
-                // 알파벳일 경우 변수명이기 때문에 reverse 하지 않음. 
-                //'#'문자를 이용하여 type과 변수명을 구분
-                    result += "#";
-                    for(int j=0; j <= i; j++){
-                        result += origin[j];
-                    }
-                    break;
-                }
-            }else{
-                result += "[]";
-                i--;
-            }
-        }
-        return result;
-    }
+		for (int i = 1; i < split.length; i++) {
+			split[i] = split[i].replaceAll(",", "");
+			split[i] = split[i].replaceAll(";", "");
+		}
+
+		
+		for(int i = 1 ; i < split.length ; i++) {
+			split[i] = parsing(split[i]);
+			System.out.println(base + split[i]+";");
+		}
+
+	}
+	private static String parsing(String target) {
+		StringBuilder sb =new StringBuilder();
+		StringBuilder tmpp = new StringBuilder(target);
+		int idx = target.length()-1;
+		while(true) {
+			char tmp = target.charAt(idx);
+			
+			if(tmp >= 'a' && tmp <= 'z')
+				break;
+			
+			if(tmp >= 'A' && tmp <= 'Z')
+				break;
+			
+			if(tmp == '[')
+				tmp = ']';
+			else if(tmp == ']')
+				tmp = '[';
+			
+			sb.append(tmp);
+			idx--;
+		}
+		
+		//앞에 연산자가 있는 경우
+		if(sb.toString().isEmpty()) {
+			idx = 0;
+			while(true) {
+				char tmp = target.charAt(idx);
+				
+				if(tmp >= 'a' && tmp <= 'z')
+					break;
+				
+				if(tmp >= 'A' && tmp <= 'Z')
+					break;
+				
+				sb.append(tmp);
+				idx++;
+			}
+			
+			tmpp.delete(0, idx);
+		}else
+			tmpp.delete(idx+1, target.length());
+		
+		sb.append(" ");
+		sb.append(tmpp);
+		
+		return sb.toString();
+	}
 }
+
