@@ -1,4 +1,4 @@
-package DFS_BFS;
+package Simulation;
 import java.util.*;
 
 public class bj3568_iSharp {
@@ -26,7 +26,7 @@ public class bj3568_iSharp {
 	private static String parsing(String target) {
 		StringBuilder sb =new StringBuilder(); //개별 변수형 저장
 		StringBuilder tmpp = new StringBuilder(target); //변수명 저장
-		int idx = target.length()-1; //개별 변수형과 변수명을 나눌 인덱스에 입력값의 -1 길이 할당
+		int idx = target.length()-1; //개별 변수형과 변수명을 나눌 인덱스에 입력값의 -1 길이 할당해 뒤에서부터 검사
 		while(true) { //뒷부분에 개별 변수형이 있는지 판단
 			char tmp = target.charAt(idx);
 			

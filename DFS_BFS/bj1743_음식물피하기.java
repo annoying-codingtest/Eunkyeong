@@ -32,7 +32,7 @@ public class bj1743_음식물피하기{
             int nextR = curR + dx[dir]; 
             int nextC = curC + dy[dir];
 
-            if(nextR < 1 || nextC < 1 || nextR >= n+1 || nextC >= m+1) continue; //범위 설정
+            if(nextR < 1 || nextC < 1 || nextR >= n+1 || nextC >= m+1) continue;
             else if (map[nextR][nextC] == 1 && !visited[nextR][nextC]) //상하좌우 중 값이 1이면서 방문하지 않은 곳 탐색
                 dfs(nextR, nextC);
         }
